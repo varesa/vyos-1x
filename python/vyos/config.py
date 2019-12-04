@@ -137,7 +137,7 @@ class Config(object):
         if self.__session_env:
             p = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=self.__session_env)
         else:
-            p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, env={})
         out = p.stdout.read()
         p.wait()
         if p.returncode != 0:
