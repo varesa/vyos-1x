@@ -137,7 +137,10 @@ class Config(object):
         if self.__session_env:
             p = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=self.__session_env)
         else:
-            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, env={})
+            env = os.environ
+            env['VYATTA_TEMPLATE_LEVEL'] = '/'
+            env['VYATTA_EDIT_LEVEL'] = '/'
+            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, env=env)
         out = p.stdout.read()
         p.wait()
         if p.returncode != 0:
